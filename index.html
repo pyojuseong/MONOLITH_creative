@@ -1,0 +1,1196 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MONOLITH Creative</title>
+  <style>
+    :root {
+      --ink: #101113;
+      --muted: #8b8b8b;
+      --line: rgba(16, 24, 40, 0.1);
+      --paper: #f2f2f2;
+      --blue-deep: #0540f2;
+      --blue: #0554f2;
+      --blue-soft: #056cf2;
+      --brown: #402516;
+      --cyan: #7eb3ff;
+      --white: #ffffff;
+      --radius: 8px;
+      --shadow: 0 24px 70px rgba(5, 84, 242, 0.16);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      font-family: "Pretendard", "Inter", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      min-width: 320px;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      width: 100%;
+    }
+
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.5) 1px, transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mix-blend-mode: multiply;
+    }
+
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      z-index: 20;
+      width: min(calc(100% - 32px), 1180px);
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      transform: translateX(-50%);
+      padding: 0 10px 0 30px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 50px rgba(34, 86, 150, 0.12);
+    }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-logo {
+      width: 58px;
+      max-height: 34px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, var(--white) 0 22%, transparent 23%),
+        conic-gradient(from 10deg, var(--blue), var(--cyan), #9db7ff, var(--blue));
+      box-shadow: 0 0 24px rgba(47, 115, 255, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      font-size: 14px;
+      font-weight: 800;
+      color: rgba(13, 17, 23, 0.62);
+    }
+
+    .nav-cta {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1;
+      box-shadow: 0 14px 34px rgba(5, 84, 242, 0.24);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 12%, rgba(5, 108, 242, 0.32), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(5, 64, 242, 0.38), transparent 22%),
+        linear-gradient(180deg, #dfe9ff 0%, var(--paper) 78%);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0 0 18vh;
+      overflow: hidden;
+    }
+
+    .hero-media video {
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.72;
+      filter: saturate(1.04) contrast(1.02);
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(242, 242, 242, 0.04) 0%, rgba(242, 242, 242, 0.2) 56%, var(--paper) 100%),
+        radial-gradient(circle at 50% 72%, rgba(255, 255, 255, 0.92), transparent 34%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      padding: 122px 0 52px;
+      display: grid;
+      grid-template-rows: minmax(210px, 1fr) auto;
+      align-content: end;
+    }
+
+    .hero-logo-wrap {
+      align-self: end;
+      justify-self: center;
+      display: grid;
+      justify-items: center;
+      gap: 0;
+      margin-bottom: 34px;
+      animation: fadeUp 1.1s ease both;
+    }
+
+    .hero-logo {
+      width: auto;
+      max-width: min(325px, 56vw);
+      height: min(238px, 35vh);
+      object-fit: contain;
+      filter: drop-shadow(0 24px 50px rgba(27, 64, 120, 0.18));
+    }
+
+    .hero-kicker {
+      display: none;
+      gap: 10px;
+      align-items: center;
+      color: rgba(13, 17, 23, 0.58);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero-kicker::before,
+    .hero-kicker::after {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: rgba(13, 17, 23, 0.25);
+    }
+
+    .hero-copy {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: start;
+      gap: clamp(48px, 10vw, 160px);
+      padding-top: 28px;
+      border-top: 1px solid rgba(13, 17, 23, 0.12);
+      animation: fadeUp 1.1s 0.22s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 3.3vw, 48px);
+      line-height: 1.22;
+      font-weight: 900;
+      letter-spacing: 0;
+      max-width: 560px;
+    }
+
+    .hero-sub {
+      color: rgba(13, 17, 23, 0.66);
+      font-size: clamp(16px, 1.45vw, 22px);
+      line-height: 1.85;
+      font-weight: 700;
+      word-break: keep-all;
+      justify-self: end;
+      max-width: 560px;
+    }
+
+    .cloud {
+      position: absolute;
+      z-index: 1;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.68);
+      filter: blur(18px);
+      box-shadow: 0 0 80px rgba(255, 255, 255, 0.9);
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    .cloud.one {
+      width: 310px;
+      height: 86px;
+      left: -46px;
+      top: 30vh;
+    }
+
+    .cloud.two {
+      width: 260px;
+      height: 74px;
+      right: -28px;
+      top: 16vh;
+      animation-delay: -4s;
+    }
+
+    .section {
+      position: relative;
+      padding: 108px 0;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: flex-start;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin-top: 10px;
+      font-size: clamp(32px, 3.2vw, 48px);
+      line-height: 1.16;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 650;
+      word-break: keep-all;
+    }
+
+    .concept {
+      background:
+        radial-gradient(circle at 15% 0%, rgba(5, 108, 242, 0.18), transparent 28%),
+        linear-gradient(180deg, var(--paper), #ffffff 70%);
+      padding-top: 168px;
+    }
+
+    .concept-panel {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .concept-row {
+      display: contents;
+    }
+
+    .concept-key,
+    .concept-desc {
+      padding: 38px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .concept-key {
+      font-size: clamp(26px, 2.6vw, 38px);
+      line-height: 1.15;
+      font-weight: 900;
+      color: rgba(13, 17, 23, 0.95);
+    }
+
+    .concept-desc {
+      color: rgba(13, 17, 23, 0.66);
+      font-size: clamp(17px, 1.35vw, 22px);
+      line-height: 1.55;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+
+    .projects {
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #071126;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .project-card img,
+    .project-card video {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      filter: saturate(0.95) contrast(0.94);
+      transition: transform 0.7s ease, filter 0.7s ease;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(4, 10, 20, 0.05), rgba(4, 10, 20, 0.6)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.18), transparent 45%);
+    }
+
+    .project-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      color: var(--white);
+    }
+
+    .project-index {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      font-size: 12px;
+      font-weight: 900;
+      opacity: 0.82;
+    }
+
+    .project-card h3 {
+      max-width: 620px;
+      font-size: clamp(22px, 2.1vw, 32px);
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .project-card p {
+      max-width: 640px;
+      margin-top: 12px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1.65;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+
+    .project-card:hover img,
+    .project-card:hover video {
+      transform: scale(1.06);
+      filter: saturate(1.08) contrast(1.04);
+    }
+
+    .workflow {
+      background:
+        radial-gradient(circle at 92% 12%, rgba(5, 84, 242, 0.16), transparent 26%),
+        var(--paper);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 25px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(var(--blue), rgba(47, 115, 255, 0.05));
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 72px minmax(0, 0.78fr) minmax(240px, 1fr);
+      gap: 22px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid rgba(47, 115, 255, 0.14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 18px 45px rgba(68, 103, 148, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .timeline-num {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--blue);
+      font-weight: 900;
+      box-shadow: 0 14px 30px rgba(47, 115, 255, 0.18);
+    }
+
+    .timeline-copy h3 {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 900;
+    }
+
+    .timeline-copy p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      word-break: keep-all;
+    }
+
+    .timeline-media {
+      overflow: hidden;
+      border-radius: var(--radius);
+      aspect-ratio: 16 / 9;
+      background: #eef3ff;
+    }
+
+    .timeline-media img,
+    .timeline-media video {
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .spectrum {
+      background: #ffffff;
+    }
+
+    .spectrum .section-head {
+      display: block;
+      margin-bottom: 34px;
+    }
+
+    .spectrum .section-title {
+      font-size: clamp(36px, 3.6vw, 54px);
+    }
+
+    .spectrum-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .filter-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-chip {
+      min-height: 44px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #f0f0f0;
+      color: rgba(16, 17, 19, 0.66);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .filter-chip.is-active {
+      background: #3f3f42;
+      color: #ffffff;
+    }
+
+    .sort-links {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 18px;
+      color: rgba(16, 17, 19, 0.36);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .sort-links span:first-child {
+      color: var(--ink);
+    }
+
+    .spectrum-card.is-hidden {
+      display: none;
+    }
+
+    .spectrum-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .spectrum-card {
+      display: block;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #ffffff;
+      border: 0;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .spectrum-thumb {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e7edff, #ffffff);
+    }
+
+    .spectrum-thumb img,
+    .spectrum-thumb video {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease, filter 0.55s ease;
+    }
+
+    .spectrum-thumb .hover-video {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spectrum-card:hover .spectrum-thumb .hover-video {
+      opacity: 1;
+    }
+
+    .spectrum-card:hover .spectrum-thumb .base-thumb {
+      opacity: 0;
+    }
+
+    .spectrum-thumb::after {
+      content: "View";
+      position: absolute;
+      inset: auto 14px 14px auto;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--white);
+      background: rgba(13, 17, 23, 0.7);
+      font-size: 12px;
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .spectrum-info {
+      padding: 16px 0 4px;
+    }
+
+    .spectrum-info h3 {
+      min-height: 54px;
+      color: #0b0b0c;
+      font-size: clamp(17px, 1.18vw, 21px);
+      line-height: 1.42;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+
+    .spectrum-info p {
+      margin-top: 8px;
+      color: rgba(16, 17, 19, 0.36);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .spectrum-card:hover {
+      transform: translateY(-6px);
+      box-shadow: none;
+    }
+
+    .spectrum-card:hover .spectrum-thumb img,
+    .spectrum-card:hover .spectrum-thumb video {
+      transform: scale(1.06);
+      filter: saturate(1.08);
+    }
+
+    .spectrum-card:hover .spectrum-thumb::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ending {
+      min-height: 68vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(47, 115, 255, 0.35), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #eaf4ff 100%);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .ending h2 {
+      font-size: clamp(30px, 3.5vw, 52px);
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .ending-logo {
+      width: min(160px, 30vw);
+      height: auto;
+      margin: 30px auto 0;
+      object-fit: contain;
+      filter: drop-shadow(0 22px 48px rgba(5, 84, 242, 0.14));
+    }
+
+    .ending p {
+      margin-top: 24px;
+      color: rgba(13, 17, 23, 0.62);
+      font-size: clamp(18px, 1.65vw, 26px);
+      font-weight: 800;
+    }
+
+    .mail-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 42px;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 15px;
+      font-weight: 850;
+      box-shadow: 0 18px 45px rgba(47, 115, 255, 0.28);
+    }
+
+    .ending .copyright {
+      max-width: 720px;
+      margin: 20px auto 0;
+      color: rgba(13, 17, 23, 0.42);
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 400;
+      letter-spacing: 0;
+      word-break: keep-all;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOnly {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(28px, -18px, 0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-copy,
+      .concept-panel,
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .hero-sub {
+        max-width: 620px;
+      }
+
+      .project-grid,
+      .spectrum-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .timeline::before {
+        display: none;
+      }
+
+      .timeline-media {
+        aspect-ratio: 16 / 9;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        top: 12px;
+        height: 52px;
+        padding: 0 8px 0 18px;
+        gap: 22px;
+      }
+
+      .brand span {
+        font-size: 13px;
+      }
+
+      .brand-logo {
+        width: 54px;
+      }
+
+      .nav-cta {
+        min-height: 38px;
+        padding: 0 14px;
+        font-size: 12px;
+      }
+
+      .hero-inner,
+      .container {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .hero-inner {
+        padding: 96px 0 38px;
+      }
+
+      .hero-copy {
+        padding-top: 24px;
+      }
+
+      .section {
+        padding: 82px 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .spectrum-tools {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 34px;
+      }
+
+      .section-note {
+        margin-top: 16px;
+      }
+
+      .project-grid,
+      .spectrum-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        aspect-ratio: 16 / 9;
+      }
+
+      .concept-key,
+      .concept-desc {
+        padding: 22px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="二쇱슂 硫붾돱">
+    <a class="brand" href="#top" aria-label="MONOLITH Creative ??>
+      <img class="brand-logo" src="./01_Logo/logo_1_諛곌꼍?됱씠 %23F2F2F2?쇰븣.webp" alt="MONOLITH Creative" />
+    </a>
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#project">Project</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#spectrum">Spectrum</a>
+    </div>
+    <a class="nav-cta" href="mailto:contact@monolithcreative.kr">Contact</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true">
+        <video src="./02_Hero_banner/02_hero_banner.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+      <span class="cloud one" aria-hidden="true"></span>
+      <span class="cloud two" aria-hidden="true"></span>
+      <div class="hero-inner">
+        <div class="hero-logo-wrap">
+          <img class="hero-logo" src="./01_Logo/logo_1_諛곌꼍?됱씠 %23F2F2F2?쇰븣.webp" alt="MONOLITH Creative logo" />
+        </div>
+        <div class="hero-copy">
+          <h1 id="hero-title">紐⑤뱺 ?붿냼瑜??섎굹濡?br />援ъ“?뷀븳??</h1>
+          <p class="hero-sub">?ㅼ뼇???붿냼瑜??섎굹???λ㈃?쇰줈 ?듯빀??br />援ъ“?곸씤 ?꾩꽦?꾨? 留뚮뱶??br />鍮꾩＜??洹몃옒???붿옄?대꼫?낅땲??</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="concept" class="section concept">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Concept</p>
+            <h2 class="section-title">A single scene,<br />built from many layers.</h2>
+          </div>
+        </div>
+        <div class="concept-panel">
+          <div class="concept-row reveal">
+            <div class="concept-key">STRUCTURE</div>
+            <div class="concept-desc">?λ㈃? ?뺥깭媛 ?꾨땲??援ъ“?먯꽌 ?쒖옉?⑸땲??</div>
+          </div>
+          <div class="concept-row reveal">
+            <div class="concept-key">SPACE</div>
+            <div class="concept-desc">怨듦컙???ㅺ퀎?섍퀬, 洹??꾩뿉 媛먯젙???볦뒿?덈떎.</div>
+          </div>
+          <div class="concept-row reveal">
+            <div class="concept-key">INTEGRATION</div>
+            <div class="concept-desc">珥ъ쁺遺??洹몃옒?쎄퉴吏, 遺꾨━?섏? ?딄퀬 ?섎굹濡??ㅺ퀎?⑸땲??</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="project" class="section projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Project</p>
+            <h2 class="section-title">Four core scenes.</h2>
+          </div>
+        </div>
+        <div class="project-grid">
+          <a class="project-card reveal video-hover" href="./projects/project-1.html" aria-label="3D Scene Design ?곸꽭濡??대룞">
+            <video src="./03_Project_Thumb/03_project_thumb_1.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="project-content">
+              <span class="project-index">PROJECT 01</span>
+              <h3>3D Scene Design</h3>
+              <p>援ъ“? 怨듦컙??湲곕컲?쇰줈 3D ?ъ쓣 ?ㅺ퀎?섍퀬 援ы쁽?섏뿬, 猷⑸럞?섏????ㅽ넗由?以묒떖 鍮꾩＜?쇱쓣 ?꾩꽦</p>
+            </div>
+          </a>
+          <a class="project-card reveal video-hover" href="./projects/project-2.html" aria-label="裕ㅼ쭅鍮꾨뵒??湲고쉷 珥ъ쁺 VFX ?곸꽭濡??대룞">
+            <video src="./03_Project_Thumb/03_project_thumb_2.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="project-content">
+              <span class="project-index">PROJECT 02</span>
+              <h3>裕ㅼ쭅鍮꾨뵒??湲고쉷쨌珥ъ쁺쨌VFX</h3>
+              <p>湲고쉷遺??珥ъ쁺, VFX源뚯? ??怨쇱젙???듯빀 ?쒖옉?섏뿬 怨듬え?????援?갑遺?κ??? ?섏긽 ?묓뭹 ?꾩꽦</p>
+            </div>
+          </a>
+          <a class="project-card reveal video-hover" href="./projects/project-3.html" aria-label="Space Challenge 2025 in ?먯＜ ?곸꽭濡??대룞">
+            <img src="./03_Project_Thumb/03_Project_Thumb_3.webp" alt="Space Challenge 2025 in ?먯＜ ?몃꽕?? loading="lazy" />
+            <div class="project-content">
+              <span class="project-index">PROJECT 03</span>
+              <h3>Space Challenge 2025 in ?먯＜</h3>
+              <p>?됱궗 ?꾨컲??鍮꾩＜?쇱쓣 珥앷큵?섎ŉ, 洹몃옒?쎈????몄뇙臾쇨퉴吏 ?듯빀 ?ㅺ퀎 諛??쒖옉. ?洹쒕え 援?? 湲곌? ?됱궗瑜??덉젙?곸쑝濡??꾩꽦</p>
+            </div>
+          </a>
+          <a class="project-card reveal video-hover" href="./projects/project-4.html" aria-label="援먮궡 ??명삊?ν? 珥ъ쁺蹂댁“ ?곸꽭濡??대룞">
+            <video src="./03_Project_Thumb/03_Project_Thumb_4.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="project-content">
+              <span class="project-index">PROJECT 04</span>
+              <h3>援먮궡 ??명삊?ν? 珥ъ쁺蹂댁“</h3>
+              <p>?ㅼ뼇???붽컖怨??쒖젏???쒖슜???꾩옣???먮쫫??湲곕줉?섍퀬 ??먮━利?湲곕컲??珥ъ쁺 寃곌낵臾??꾩꽦</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section workflow">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Workflow</p>
+            <h2 class="section-title">From blueprint<br />to final output.</h2>
+          </div>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-num">01</div>
+            <div class="timeline-copy">
+              <h3>?꾨㈃?ㅺ퀎</h3>
+              <p>怨듦컙??湲곗??먭낵 ?ㅻ툕?앺듃 愿怨꾨? 癒쇱? ?ㅺ퀎???λ㈃??堉덈?瑜?留뚮벊?덈떎.</p>
+            </div>
+            <div class="timeline-media"><img src="./04_WorkFlow/01_?꾨㈃?ㅺ퀎/building_print.png" alt="?꾨㈃?ㅺ퀎 ?대?吏" loading="lazy" /></div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-num">02</div>
+            <div class="timeline-copy">
+              <h3>?ㅽ??쇳봽?덉엫</h3>
+              <p>?꾩꽦 ?λ㈃??諛?? ?? 媛먯젙?좎쓣 誘몃━ ?뺣━???쒓컖 諛⑺뼢??怨좎젙?⑸땲??</p>
+            </div>
+            <div class="timeline-media"><img src="./04_WorkFlow/02_?ㅽ??쇳봽?덉엫/Final_concept_art_cut.png" alt="?ㅽ??쇳봽?덉엫 ?대?吏" loading="lazy" /></div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-num">03</div>
+            <div class="timeline-copy">
+              <h3>??꾪뀒?대툝 ?명똿</h3>
+              <p>?쒖옉 ?쒖꽌? ?쒓컙???뺣젹??珥ъ쁺, 紐⑤뜽留? ?꾨컲 怨쇱젙?????먮쫫?쇰줈 ?곌껐?⑸땲??</p>
+            </div>
+            <div class="timeline-media"><img src="./04_WorkFlow/03_??꾪뀒?대툝 ?명똿/??꾪뀒?대툝.jpg" alt="??꾪뀒?대툝 ?대?吏" loading="lazy" /></div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-num">04</div>
+            <div class="timeline-copy">
+              <h3>3D紐⑤뜽留?怨쇱젙</h3>
+              <p>?ㅺ퀎??援щ룄 ?덉뿉??紐⑤뜽留곴낵 ?吏곸엫??議곗젙?섎ŉ 怨듦컙媛먯쓣 援ъ껜?뷀빀?덈떎.</p>
+            </div>
+            <div class="timeline-media"><video src="./04_WorkFlow/04_3d紐⑤뜽留?怨쇱젙/processing.mp4" muted loop playsinline preload="metadata"></video></div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-num">05</div>
+            <div class="timeline-copy">
+              <h3>理쒖쥌 ?꾩썐??/h3>
+              <p>援ъ“, 議곕챸, 洹몃옒??諛?꾨? 留욎떠 ?섎굹???꾩꽦??鍮꾩＜?쇰줈 ?뺣━?⑸땲??</p>
+            </div>
+            <div class="timeline-media"><img src="./04_WorkFlow/05_理쒖쥌 ?꾩썐????.png" alt="理쒖쥌 ?꾩썐???대?吏" loading="lazy" /></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="spectrum" class="section spectrum">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2 class="section-title">Spectrum</h2>
+          </div>
+        </div>
+        <div class="spectrum-tools reveal" aria-label="?ㅽ럺?몃읆 蹂닿린 ?듭뀡">
+          <div class="filter-list" role="list" aria-label="?묒뾽 移댄뀒怨좊━">
+            <button class="filter-chip is-active" type="button" data-filter="all">?꾩껜</button>
+            <button class="filter-chip" type="button" data-filter="3d">3D</button>
+            <button class="filter-chip" type="button" data-filter="video">?곸긽/VFX</button>
+            <button class="filter-chip" type="button" data-filter="graphic">洹몃옒?쎈뵒?먯씤</button>
+            <button class="filter-chip" type="button" data-filter="uiux">UIUX</button>
+            <button class="filter-chip" type="button" data-filter="branding">釉뚮옖??/button>
+          </div>
+        </div>
+        <div class="spectrum-grid">
+          <a class="spectrum-card reveal video-hover" href="./spectrum/lookdev-3d-scene-2026.html" data-category="3d">
+            <div class="spectrum-thumb"><video src="./05_Spectrum/00_猷⑸럞 ?섏???3D ???곗텧援ъ꽦_2026/踰좊꼫 ?대?吏/03_projrct_thumb_1.mp4" muted loop playsinline preload="metadata"></video></div>
+            <div class="spectrum-info"><h3>猷⑸럞 ?섏???3D ???곗텧援ъ꽦</h3><p>2026</p></div>
+          </a>
+          <a class="spectrum-card reveal video-hover" href="./spectrum/room-modeling-2026.html" data-category="3d">
+            <div class="spectrum-thumb">
+              <img class="base-thumb" src="./05_Spectrum/01_?꾧린?먭린???곗텧濡?蹂댁뿬二쇰뒗 ??낵 諛ㅼ쓽 Room ?쇱씠??2026/踰좊꼫 ?대?吏/?뚮젅???덈맆?뚯쓽 ?몃꽕?쇱씠誘몄?.webp" alt="?꾧린?먭린???곗텧濡?蹂댁뿬二쇰뒗 ??낵 諛ㅼ쓽 Room ?쇱씠?? loading="lazy" />
+              <video class="hover-video" src="./05_Spectrum/01_?꾧린?먭린???곗텧濡?蹂댁뿬二쇰뒗 ??낵 諛ㅼ쓽 Room ?쇱씠??2026/踰좊꼫 ?대?吏/room.mp4" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="spectrum-info"><h3>?꾧린?먭린???곗텧濡?蹂댁뿬二쇰뒗 ??낵 諛ㅼ쓽 Room ?쇱씠??/h3><p>2026</p></div>
+          </a>
+          <a class="spectrum-card reveal video-hover" href="./spectrum/music-video-2025.html" data-category="video">
+            <div class="spectrum-thumb"><video src="./05_Spectrum/02_?꾨Ц媛 ?섏???裕ㅼ쭅鍮꾨뵒???곗텧_2025/踰좊꼫 ?대?吏/03_project_thumb_2.mp4" muted loop playsinline preload="metadata"></video></div>
+            <div class="spectrum-info"><h3>?꾨Ц媛 ?섏???裕ㅼ쭅鍮꾨뵒???곗텧</h3><p>2025</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/government-event-design-2025.html" data-category="graphic">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/03_援??湲곌? ?됱궗 ?댁쁺怨??붿옄??2025/踰좊꼫 ?대?吏/03_Project_Thumb_3.webp" alt="援??湲곌? ?됱궗 ?댁쁺怨??붿옄?? loading="lazy" /></div>
+            <div class="spectrum-info"><h3>援??湲곌? ?됱궗 ?댁쁺怨??붿옄??/h3><p>2025</p></div>
+          </a>
+          <a class="spectrum-card reveal video-hover" href="./spectrum/journalism-shooting-2026.html">
+            <div class="spectrum-thumb"><video src="./05_Spectrum/04_?섎?瑜??꾨떖?섎뒗 蹂대룄 珥ъ쁺_2026/踰좊꼫 ?대?吏/03_Project_Thumb_4.mp4" muted loop playsinline preload="metadata"></video></div>
+            <div class="spectrum-info"><h3>?섎?瑜??꾨떖?섎뒗 蹂대룄 珥ъ쁺</h3><p>2026</p></div>
+          </a>
+          <a class="spectrum-card reveal video-hover" href="./spectrum/motion-typography-2023.html" data-category="video graphic">
+            <div class="spectrum-thumb">
+              <img class="base-thumb" src="./05_Spectrum/05_?꾩옣媛먯쓣 二쇰뒗 紐⑥뀡 ??댄룷洹몃옒??2023/踰좊꼫 ?대?吏/?뚮젅???덈맆???몃꽕??png" alt="?꾩옣媛먯쓣 二쇰뒗 紐⑥뀡 ??댄룷洹몃옒?? loading="lazy" />
+              <video class="hover-video" src="./05_Spectrum/05_?꾩옣媛먯쓣 二쇰뒗 紐⑥뀡 ??댄룷洹몃옒??2023/踰좊꼫 ?대?吏/underwater_kinetictypo.mp4" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="spectrum-info"><h3>?꾩옣媛먯쓣 二쇰뒗 紐⑥뀡 ??댄룷洹몃옒??/h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/drama-branding-moving-poster-2023.html" data-category="video branding">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/06_?쒕씪留?釉뚮옖?⑹쓣 ?쒖슜??臾대튃?ъ뒪??2023/踰좊꼫 ?대?吏/?꾨씪臾몄쓽 寃.webp" alt="?쒕씪留?釉뚮옖?⑹쓣 ?쒖슜??臾대튃?ъ뒪?? loading="lazy" /></div>
+            <div class="spectrum-info"><h3>?쒕씪留?釉뚮옖?⑹쓣 ?쒖슜??臾대튃?ъ뒪??/h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal video-hover" href="./spectrum/app-prototype-2023.html" data-category="video uiux branding">
+            <div class="spectrum-thumb">
+              <img class="base-thumb" src="./05_Spectrum/07_硫?곕??붿뼱瑜?怨좊젮???댄뵆 ?꾨줈?좏???2023/踰좊꼫 ?대?吏/?뚮젅???덊븷 ???몃꽕??webp" alt="硫?곕??붿뼱瑜?怨좊젮???댄뵆 ?꾨줈?좏??? loading="lazy" />
+              <video class="hover-video" src="./05_Spectrum/07_硫?곕??붿뼱瑜?怨좊젮???댄뵆 ?꾨줈?좏???2023/踰좊꼫 ?대?吏/1.mp4" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="spectrum-info"><h3>硫?곕??붿뼱瑜?怨좊젮???댄뵆 ?꾨줈?좏???/h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/basic-motion-graphic-2023.html" data-category="video graphic">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/08_?앸룞媛??덈뒗 踰좎씠吏?紐⑥뀡洹몃옒??2023/踰좊꼫 ?대?吏/Untitled-1.webp" alt="?앸룞媛??덈뒗 踰좎씠吏?紐⑥뀡洹몃옒?? loading="lazy" /></div>
+            <div class="spectrum-info"><h3>?앸룞媛??덈뒗 踰좎씠吏?紐⑥뀡洹몃옒??/h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/icon-design-2023.html" data-category="graphic uiux">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/09_而⑥뀎?덈뒗 ?꾩씠肄??쒖옉_2023/踰좊꼫 ?대?吏/Untitled-2.webp" alt="而⑥뀎?덈뒗 ?꾩씠肄??쒖옉" loading="lazy" /></div>
+            <div class="spectrum-info"><h3>而⑥뀎?덈뒗 ?꾩씠肄??쒖옉</h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/key-visual-multimedia-2023.html" data-category="graphic branding">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/10_?ㅻ퉬二쇱뼹怨??ㅼ뼇??硫?곕??붿뼱 ?붿옄??2023/踰좊꼫 ?대?吏/Untitled-2.webp" alt="?ㅻ퉬二쇱뼹怨??ㅼ뼇??硫?곕??붿뼱 ?붿옄?? loading="lazy" /></div>
+            <div class="spectrum-info"><h3>?ㅻ퉬二쇱뼹怨??ㅼ뼇??硫?곕??붿뼱 ?붿옄??/h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/font-design-2023.html" data-category="graphic uiux branding">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/11_而⑥뀎 ?덈뒗 ?고듃 ?쒖옉_2023/踰좊꼫 ?대?吏/Untitled-2.webp" alt="而⑥뀎 ?덈뒗 ?고듃 ?쒖옉" loading="lazy" /></div>
+            <div class="spectrum-info"><h3>而⑥뀎 ?덈뒗 ?고듃 ?쒖옉</h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal" href="./spectrum/poster-design-2023.html" data-category="graphic">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/12_?먭?吏 ?ㅽ??쇱쓽 ?ъ뒪???붿옄??2023/踰좊꼫 ?대?吏/Untitled-2.webp" alt="?먭?吏 ?ㅽ??쇱쓽 ?ъ뒪???붿옄?? loading="lazy" /></div>
+            <div class="spectrum-info"><h3>?먭?吏 ?ㅽ??쇱쓽 ?ъ뒪???붿옄??/h3><p>2023</p></div>
+          </a>
+          <a class="spectrum-card reveal video-hover" href="./spectrum/brand-2d-animation-2022.html" data-category="video branding">
+            <div class="spectrum-thumb">
+              <img class="base-thumb" src="./05_Spectrum/13_湲곗뾽釉뚮옖?⑹쓣 ?쒖슜??2D ?좊땲硫붿씠??2022/踰좊꼫 ?대?吏/?뚮젅???덈맆 ???몃꽕??webp" alt="湲곗뾽釉뚮옖?⑹쓣 ?쒖슜??2D ?좊땲硫붿씠?? loading="lazy" />
+              <video class="hover-video" src="./05_Spectrum/13_湲곗뾽釉뚮옖?⑹쓣 ?쒖슜??2D ?좊땲硫붿씠??2022/踰좊꼫 ?대?吏/1.mp4" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="spectrum-info"><h3>湲곗뾽釉뚮옖?⑹쓣 ?쒖슜??2D ?좊땲硫붿씠??/h3><p>2022</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ending" aria-label="MONOLITH Creative contact">
+      <div class="container reveal">
+        <h2>紐⑤뱺 ?붿냼瑜??섎굹濡?援ъ“?뷀븳??</h2>
+        <img class="ending-logo" src="./01_Logo/logo_1_諛곌꼍?됱씠 %23F2F2F2?쇰븣.webp" alt="MONOLITH Creative" />
+        <a class="mail-button" href="mailto:contact@monolithcreative.kr">contact@monolithcreative.kr</a>
+        <p class="copyright">紐⑤뱺 ??묐Ъ????묎텒? MONOLITH creative???덉뒿?덈떎. MNLC???숈쓽 ?놁씠 蹂듭젣瑜?湲덉??⑸땲??</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+    document.querySelectorAll(".filter-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const filter = chip.dataset.filter || "all";
+        document.querySelectorAll(".filter-chip").forEach((item) => item.classList.remove("is-active"));
+        chip.classList.add("is-active");
+
+        document.querySelectorAll(".spectrum-card").forEach((card) => {
+          const categories = (card.dataset.category || "").split(" ");
+          const shouldShow = filter === "all" || categories.includes(filter);
+          card.classList.toggle("is-hidden", !shouldShow);
+
+          if (!shouldShow) {
+            const video = card.querySelector("video");
+            if (video) {
+              video.pause();
+              video.currentTime = 0;
+            }
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll(".video-hover").forEach((card) => {
+      const video = card.querySelector("video");
+      if (!video) return;
+
+      const stopVideo = () => {
+        video.pause();
+        video.currentTime = 0;
+      };
+
+      card.addEventListener("mouseenter", () => {
+        video.play().catch(() => {});
+      });
+
+      card.addEventListener("mouseleave", stopVideo);
+      card.addEventListener("focusin", () => {
+        video.play().catch(() => {});
+      });
+      card.addEventListener("focusout", stopVideo);
+    });
+
+    const workflowObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target.querySelector("video");
+        if (!video) return;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.35 });
+
+    document.querySelectorAll(".timeline-media").forEach((media) => workflowObserver.observe(media));
+  </script>
+</body>
+</html>
+
