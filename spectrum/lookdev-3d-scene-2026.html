@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>디지몬 월드 CAFÉ | MONOLITH Creative</title>
+  <style>
+    :root {
+      --ink: #101113;
+      --muted: #747981;
+      --line: rgba(16, 24, 40, 0.1);
+      --paper: #f2f2f2;
+      --blue-deep: #0540f2;
+      --blue: #0554f2;
+      --blue-soft: #056cf2;
+      --brown: #402516;
+      --white: #ffffff;
+      --radius: 8px;
+      --max: 1180px;
+      --shadow: 0 24px 70px rgba(5, 84, 242, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      font-family: "Pretendard", "Inter", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      width: 100%;
+    }
+
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      opacity: 0.035;
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.42) 1px, transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.42) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mix-blend-mode: multiply;
+    }
+
+    .nav {
+      position: relative;
+      z-index: 10;
+      width: min(calc(100% - 32px), var(--max));
+      height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: 18px auto 0;
+      padding: 0 10px 0 28px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 999px;
+      background: rgba(242, 242, 242, 0.78);
+      box-shadow: 0 18px 60px rgba(5, 20, 45, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      flex: 0 0 auto;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 3vw, 44px);
+      margin-left: 14px;
+      color: rgba(13, 17, 23, 0.68);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .contact-pill {
+      min-width: 112px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      border-radius: 999px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
+      box-shadow: 0 14px 30px rgba(5, 84, 242, 0.22);
+    }
+
+    .page {
+      padding-bottom: 90px;
+    }
+
+    .hero-banner {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 26px auto 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #e9edf4;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-banner img {
+      height: auto;
+      object-fit: contain;
+    }
+
+    .intro {
+      width: min(calc(100% - 360px), 1540px);
+      margin: 112px auto 124px;
+    }
+
+    .intro h1 {
+      text-align: left;
+      color: var(--ink);
+      font-size: clamp(28px, 2.4vw, 44px);
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: 0;
+      word-break: keep-all;
+    }
+
+    .intro-copy {
+      max-width: 1460px;
+      margin: 132px 0 0;
+      color: rgba(13, 17, 23, 0.86);
+      font-size: clamp(19px, 1.42vw, 27px);
+      line-height: 1.42;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+
+    .intro.no-title {
+      margin-top: 118px;
+    }
+
+    .intro.no-title .intro-copy {
+      margin-top: 0;
+    }
+
+    .section {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 76px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin-bottom: 26px;
+      color: var(--ink);
+      font-size: clamp(22px, 2.6vw, 36px);
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .media-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #e7ebf4;
+      box-shadow: var(--shadow);
+    }
+
+    .media-frame video,
+    .media-frame img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .main-visual {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .play-toggle {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      border: 0;
+      background: linear-gradient(180deg, rgba(5, 20, 45, 0.04), rgba(5, 20, 45, 0.22));
+      color: var(--white);
+      cursor: pointer;
+      transition: opacity 0.22s ease, background 0.22s ease;
+    }
+
+    .play-toggle::before {
+      content: "";
+      width: clamp(68px, 7vw, 92px);
+      height: clamp(68px, 7vw, 92px);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 22px 70px rgba(5, 84, 242, 0.24), inset 0 0 0 10px rgba(5, 84, 242, 0.82);
+      backdrop-filter: blur(16px);
+    }
+
+    .play-toggle::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid #fff;
+      transform: translateX(3px);
+      filter: drop-shadow(0 4px 10px rgba(5, 20, 45, 0.24));
+    }
+
+    .media-frame.is-playing .play-toggle,
+    .media-frame.is-playing:hover .play-toggle,
+    .media-frame.is-playing:focus-within .play-toggle {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .media-frame:hover .play-toggle,
+    .media-frame:focus-within .play-toggle {
+      opacity: 1;
+      pointer-events: auto;
+      background: linear-gradient(180deg, rgba(5, 20, 45, 0.02), rgba(5, 20, 45, 0.18));
+    }
+
+    .style-grid,
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .animation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .full-span {
+      grid-column: 1 / -1;
+    }
+
+    .plain-media {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #e9edf4;
+      box-shadow: 0 12px 34px rgba(5, 20, 45, 0.06);
+    }
+
+    .plain-media img,
+    .plain-media video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .credit {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 118px 0 0;
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+
+    .credit h2 {
+      color: var(--ink);
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .credit-row {
+      width: min(460px, 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 34px auto 76px;
+      font-size: clamp(14px, 1vw, 17px);
+      line-height: 1.4;
+    }
+
+    .credit-role {
+      text-align: right;
+      color: rgba(13, 17, 23, 0.52);
+      font-weight: 800;
+    }
+
+    .credit-name {
+      text-align: left;
+      color: var(--ink);
+      font-weight: 850;
+    }
+
+    .ending-logo {
+      position: relative;
+      z-index: 2;
+      width: min(260px, 42vw);
+      margin: 0 auto -42px;
+      filter: drop-shadow(0 22px 48px rgba(5, 84, 242, 0.13));
+    }
+
+    .ending-image {
+      position: relative;
+      width: min(100%, 1420px);
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--paper);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.18) 10%, black 32%, black 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.18) 10%, black 32%, black 100%);
+    }
+
+    .ending-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .copyright {
+      max-width: 760px;
+      margin: 58px auto 0;
+      color: rgba(13, 17, 23, 0.42);
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 400;
+      letter-spacing: 0;
+      word-break: keep-all;
+    }
+
+    .to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 80;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(13, 17, 23, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 16px 42px rgba(5, 20, 45, 0.12);
+      backdrop-filter: blur(14px);
+    }
+
+    .zoomable-image {
+      cursor: zoom-in;
+    }
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      border: 0;
+      background: rgba(13, 17, 23, 0.86);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .image-lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .image-lightbox img {
+      width: auto;
+      max-width: min(94vw, 1600px);
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.34);
+      cursor: zoom-out;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        height: auto;
+        min-height: 58px;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 8px 10px 8px 16px;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 0;
+        padding: 0 8px 4px;
+        font-size: 13px;
+      }
+
+      .intro {
+        margin: 70px auto 78px;
+      }
+
+      .intro h1 {
+        text-align: left;
+      }
+
+      .intro-copy {
+        margin-top: 30px;
+      }
+
+    .intro.no-title {
+      margin-top: 118px;
+    }
+
+    .intro.no-title .intro-copy {
+      margin-top: 0;
+    }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .style-grid,
+      .process-grid,
+      .animation-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="../index.html#top" aria-label="MONOLITH Creative 홈">
+      <img class="brand-logo" src="../01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" />
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#concept">Concept</a>
+      <a href="../index.html#project">Project</a>
+      <a href="../index.html#workflow">Workflow</a>
+      <a href="../index.html#spectrum">Spectrum</a>
+    </div>
+    <a class="contact-pill" href="mailto:contact@monolithcreative.kr">Contact</a>
+  </nav>
+
+  <main class="page">
+    <section class="hero-banner reveal" aria-label="Project banner">
+      <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/01_mainbanner/01_mainbanner.webp" alt="디지몬 월드 CAFÉ 메인 배너" />
+    </section>
+
+    <section class="intro reveal no-title">
+      <div class="intro-copy">
+        <p>디지몬 세계의 포스트 아포칼립스 성격을 보여주는 3D 그래픽 씬을 제작했습니다.</p>
+        <p>저녁시간대의 디지몬 세계, 그 중앙에는 ‘시작의 마을 CAFÉ’가 있습니다. 그리고 그것을 사이에 두고 두 디지몬, 알파몬과 오메가몬이 대립합니다.</p>
+        <p>세상의 멸망에서 생명의 탄생을 대비적으로 보여주는 긴장감을, 장활한 화각으로 담아 씬을 연출했습니다.</p>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="main-visual-title">
+      <h2 class="section-title" id="main-visual-title">Main Visual</h2>
+      <div class="media-frame main-visual">
+        <video id="mainVisualVideo" src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/v1.mp4" playsinline controls preload="metadata"></video>
+        <button class="play-toggle" type="button" aria-label="메인 비주얼 재생"></button>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="styleframe-title">
+      <h2 class="section-title" id="styleframe-title">Styleframe</h2>
+      <div class="style-grid">
+        <figure class="plain-media full-span">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/1_크게.webp" alt="디지몬 월드 CAFE 스타일프레임 1" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/2.webp" alt="디지몬 월드 CAFE 스타일프레임 2" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/3.webp" alt="디지몬 월드 CAFE 스타일프레임 3" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/4.png" alt="디지몬 월드 CAFE 스타일프레임 4" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/5.png" alt="디지몬 월드 CAFE 스타일프레임 5" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="animation-title">
+      <h2 class="section-title" id="animation-title">Animation</h2>
+      <div class="animation-grid">
+        <figure class="plain-media">
+          <video src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/1_1.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        </figure>
+        <figure class="plain-media">
+          <video src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/2_1.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        </figure>
+        <figure class="plain-media">
+          <video src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/3_1.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="process-title">
+      <h2 class="section-title" id="process-title">Process</h2>
+      <div class="process-grid">
+        <figure class="plain-media full-span">
+          <video src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/06_process/1_processing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/06_process/2_building_print.png" alt="디지몬 월드 CAFE 프로세스 1" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/06_process/3_asset_print_1.png" alt="디지몬 월드 CAFE 프로세스 2" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/06_process/4_asset_print_2.png" alt="디지몬 월드 CAFE 프로세스 3" loading="lazy" />
+        </figure>
+        <figure class="plain-media">
+          <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/06_process/5_타임테이블.jpg" alt="디지몬 월드 CAFE 프로세스 4" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="credit reveal" aria-labelledby="credit-title">
+      <h2 id="credit-title">Credit</h2>
+      <div class="credit-row">
+        <span class="credit-role">DIRECTOR</span>
+        <span class="credit-name">Pyo Juseong</span>
+      </div>
+      <img class="ending-logo" src="../01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" />
+      <div class="ending-image">
+        <img src="../05_Spectrum/00_룩뎁 수준의 3D 씬 연출구성_2026/상세페이지 내용과 이미지 (추후 추가예정)/08_ending/1.webp" alt="디지몬 월드 CAFE 엔딩 이미지" loading="lazy" />
+      </div>
+      <p class="copyright">모든 저작물의 저작권은 MONOLITH creative에 있습니다. MNLC의 동의 없는 복제를 금지합니다.</p>
+    </section>
+  </main>
+  <button class="image-lightbox" type="button" aria-label="이미지 크게 보기 닫기"><img alt="" /></button>
+  <button class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    const mainVisualVideo = document.querySelector("#mainVisualVideo");
+    const playToggle = document.querySelector(".play-toggle");
+    const mainVisualFrame = document.querySelector(".main-visual");
+
+    if (mainVisualVideo && playToggle && mainVisualFrame) {
+      mainVisualVideo.volume = 0.5;
+      playToggle.addEventListener("click", () => {
+        mainVisualVideo.muted = false;
+        if (mainVisualVideo.paused) {
+          mainVisualVideo.play().catch(() => {});
+        } else {
+          mainVisualVideo.pause();
+        }
+      });
+
+      mainVisualVideo.addEventListener("play", () => {
+        mainVisualFrame.classList.add("is-playing");
+      });
+
+      mainVisualVideo.addEventListener("pause", () => {
+        mainVisualFrame.classList.remove("is-playing");
+      });
+
+      mainVisualVideo.addEventListener("ended", () => {
+        mainVisualFrame.classList.remove("is-playing");
+      });
+    }
+
+    document.querySelector(".to-top")?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const lightbox = document.querySelector(".image-lightbox");
+    const lightboxImage = lightbox?.querySelector("img");
+    document.querySelectorAll(".hero-banner img, .plain-media img, .ending-image img").forEach((image) => {
+      image.classList.add("zoomable-image");
+      image.addEventListener("click", () => {
+        if (!lightbox || !lightboxImage) return;
+        lightboxImage.src = image.currentSrc || image.src;
+        lightboxImage.alt = image.alt || "Expanded project image";
+        lightbox.classList.add("is-open");
+      });
+    });
+
+    lightbox?.addEventListener("click", () => {
+      lightbox.classList.remove("is-open");
+      if (lightboxImage) lightboxImage.removeAttribute("src");
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        lightbox?.classList.remove("is-open");
+        if (lightboxImage) lightboxImage.removeAttribute("src");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -377,7 +377,22 @@
       object-fit: cover;
       transform: scale(1);
       filter: saturate(0.95) contrast(0.94);
-      transition: transform 0.7s ease, filter 0.7s ease;
+      transition: transform 0.7s ease, filter 0.7s ease, opacity 0.28s ease;
+    }
+
+    .project-card .hover-video {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .project-card:hover .hover-video,
+    .project-card:focus-visible .hover-video {
+      opacity: 1;
+    }
+
+    .project-card:hover .base-thumb,
+    .project-card:focus-visible .base-thumb {
+      opacity: 0;
     }
 
     .project-card::after {
@@ -674,8 +689,8 @@
       display: grid;
       place-items: center;
       background:
-        radial-gradient(circle at 50% 10%, rgba(47, 115, 255, 0.35), transparent 28%),
-        linear-gradient(180deg, #ffffff 0%, #eaf4ff 100%);
+        radial-gradient(circle at 50% 72%, rgba(5, 84, 242, 0.18), transparent 36%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 38%, #edf5ff 68%, #dfeaff 100%);
       text-align: center;
       overflow: hidden;
     }
@@ -689,7 +704,7 @@
     .ending-logo {
       width: min(160px, 30vw);
       height: auto;
-      margin: 30px auto 0;
+      margin: 24px auto -4px;
       object-fit: contain;
       filter: drop-shadow(0 22px 48px rgba(5, 84, 242, 0.14));
     }
@@ -725,6 +740,26 @@
       font-weight: 400;
       letter-spacing: 0;
       word-break: keep-all;
+    }
+
+    .to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 80;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(13, 17, 23, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 16px 42px rgba(5, 20, 45, 0.12);
+      backdrop-filter: blur(14px);
     }
 
     .reveal {
@@ -871,7 +906,7 @@
 
   <nav class="nav" aria-label="주요 메뉴">
     <a class="brand" href="#top" aria-label="MONOLITH Creative 홈">
-      <img class="brand-logo" src="./01_Logo/logo-main.webp" alt="MONOLITH Creative" />
+      <img class="brand-logo" src="./01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" />
     </a>
     <div class="nav-links">
       <a href="#concept">Concept</a>
@@ -891,7 +926,7 @@
       <span class="cloud two" aria-hidden="true"></span>
       <div class="hero-inner">
         <div class="hero-logo-wrap">
-          <img class="hero-logo" src="./01_Logo/logo-main.webp" alt="MONOLITH Creative logo" />
+          <img class="hero-logo" src="./01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative logo" />
         </div>
         <div class="hero-copy">
           <h1 id="hero-title">모든 요소를 하나로<br />구조화한다.</h1>
@@ -934,7 +969,7 @@
           </div>
         </div>
         <div class="project-grid">
-          <a class="project-card reveal video-hover" href="./projects/project-1.html" aria-label="3D Scene Design 상세로 이동">
+          <a class="project-card reveal video-hover" href="./spectrum/lookdev-3d-scene-2026.html" aria-label="3D Scene Design 상세로 이동">
             <video src="./03_Project_Thumb/03_project_thumb_1.mp4" muted loop playsinline preload="metadata"></video>
             <div class="project-content">
               <span class="project-index">PROJECT 01</span>
@@ -959,7 +994,8 @@
             </div>
           </a>
           <a class="project-card reveal video-hover" href="./projects/project-4.html" aria-label="교내 대외협력팀 촬영보조 상세로 이동">
-            <video src="./03_Project_Thumb/03_Project_Thumb_4.mp4" muted loop playsinline preload="metadata"></video>
+            <img class="base-thumb" src="./03_Project_Thumb/4번_플레이안될떄_썸네일 copy.webp" alt="교내 대외협력팀 촬영보조 썸네일" loading="lazy" />
+            <video class="hover-video" src="./03_Project_Thumb/03_Project_Thumb_4.mp4" muted loop playsinline preload="metadata"></video>
             <div class="project-content">
               <span class="project-index">PROJECT 04</span>
               <h3>교내 대외협력팀 촬영보조</h3>
@@ -1061,7 +1097,10 @@
             <div class="spectrum-info"><h3>국가기관 행사 운영과 디자인</h3><p>2025</p></div>
           </a>
           <a class="spectrum-card reveal video-hover" href="./spectrum/journalism-shooting-2026.html">
-            <div class="spectrum-thumb"><video src="./05_Spectrum/04_의미를 전달하는 보도 촬영_2026/베너 이미지/03_Project_Thumb_4.mp4" muted loop playsinline preload="metadata"></video></div>
+            <div class="spectrum-thumb">
+              <img class="base-thumb" src="./05_Spectrum/04_의미를 전달하는 보도 촬영_2026/베너 이미지/4번_플레이안될떄_썸네일 copy.webp" alt="의미를 전달하는 보도 촬영" loading="lazy" />
+              <video class="hover-video" src="./05_Spectrum/04_의미를 전달하는 보도 촬영_2026/베너 이미지/03_Project_Thumb_4.mp4" muted loop playsinline preload="metadata"></video>
+            </div>
             <div class="spectrum-info"><h3>의미를 전달하는 보도 촬영</h3><p>2026</p></div>
           </a>
           <a class="spectrum-card reveal video-hover" href="./spectrum/motion-typography-2023.html" data-category="video graphic">
@@ -1116,12 +1155,13 @@
     <section class="ending" aria-label="MONOLITH Creative contact">
       <div class="container reveal">
         <h2>모든 요소를 하나로 구조화한다.</h2>
-        <img class="ending-logo" src="./01_Logo/logo-main.webp" alt="MONOLITH Creative" />
+        <img class="ending-logo" src="./01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" />
         <a class="mail-button" href="mailto:contact@monolithcreative.kr">contact@monolithcreative.kr</a>
-        <p class="copyright">모든 저작물의 저작권은 MONOLITH creative에 있습니다. MNLC의 동의 없이 복제를 금지합니다.</p>
+        <p class="copyright">모든 저작물의 저작권은 MONOLITH creative에 있습니다. MNLC의 동의 없는 복제를 금지합니다.</p>
       </div>
     </section>
   </main>
+  <button class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
 
   <script>
     const revealObserver = new IntersectionObserver((entries) => {
@@ -1190,6 +1230,10 @@
     }, { threshold: 0.35 });
 
     document.querySelectorAll(".timeline-media").forEach((media) => workflowObserver.observe(media));
+
+    document.querySelector(".to-top")?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 </body>
 </html>
