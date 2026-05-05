@@ -443,6 +443,36 @@
       word-break: keep-all;
     }
 
+
+    .project-card .view-pill {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      height: 34px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: rgba(13, 17, 23, 0.72);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.24s ease, transform 0.24s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .project-card:hover .view-pill,
+    .project-card:focus-visible .view-pill {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .project-card:hover img,
     .project-card:hover video {
       transform: scale(1.06);
@@ -976,14 +1006,16 @@
               <h3>3D Scene Design</h3>
               <p>구조와 공간을 기반으로 3D 씬을 설계하고 구현하여, 룩뎁수준의 스토리 중심 비주얼을 완성</p>
             </div>
+            <span class="view-pill">VIEW</span>
           </a>
-          <a class="project-card reveal video-hover" href="./projects/project-2.html" aria-label="뮤직비디오 기획 촬영 VFX 상세로 이동">
+          <a class="project-card reveal video-hover" href="./spectrum/music-video-2025.html" aria-label="뮤직비디오 기획 촬영 VFX 상세로 이동">
             <video src="./03_Project_Thumb/03_project_thumb_2.mp4" muted loop playsinline preload="metadata"></video>
             <div class="project-content">
               <span class="project-index">PROJECT 02</span>
-              <h3>뮤직비디오 기획·촬영·VFX</h3>
+              <h3>VFX로 완성하는 뮤직비디오 연출</h3>
               <p>기획부터 촬영, VFX까지 전 과정을 통합 제작하여 공모전 대상(국방부장관상) 수상 작품 완성</p>
             </div>
+            <span class="view-pill">VIEW</span>
           </a>
           <a class="project-card reveal video-hover" href="./projects/project-3.html" aria-label="Space Challenge 2025 in 원주 상세로 이동">
             <img src="./03_Project_Thumb/03_Project_Thumb_3.webp" alt="Space Challenge 2025 in 원주 썸네일" loading="lazy" />
@@ -992,6 +1024,7 @@
               <h3>Space Challenge 2025 in 원주</h3>
               <p>행사 전반의 비주얼을 총괄하며, 그래픽부터 인쇄물까지 통합 설계 및 제작. 대규모 국가 기관 행사를 안정적으로 완성</p>
             </div>
+            <span class="view-pill">VIEW</span>
           </a>
           <a class="project-card reveal video-hover" href="./projects/project-4.html" aria-label="교내 대외협력팀 촬영보조 상세로 이동">
             <img class="base-thumb" src="./03_Project_Thumb/4번_플레이안될떄_썸네일 copy.webp" alt="교내 대외협력팀 촬영보조 썸네일" loading="lazy" />
@@ -1001,6 +1034,7 @@
               <h3>교내 대외협력팀 촬영보조</h3>
               <p>다양한 화각과 시점을 활용해 현장의 흐름을 기록하고 저널리즘 기반의 촬영 결과물 완성</p>
             </div>
+            <span class="view-pill">VIEW</span>
           </a>
         </div>
       </div>
@@ -1090,7 +1124,7 @@
           </a>
           <a class="spectrum-card reveal video-hover" href="./spectrum/music-video-2025.html" data-category="video">
             <div class="spectrum-thumb"><video src="./05_Spectrum/02_전문가 수준의 뮤직비디오 연출_2025/베너 이미지/03_project_thumb_2.mp4" muted loop playsinline preload="metadata"></video></div>
-            <div class="spectrum-info"><h3>전문가 수준의 뮤직비디오 연출</h3><p>2025</p></div>
+            <div class="spectrum-info"><h3>VFX로 완성하는 뮤직비디오 연출</h3><p>2025</p></div>
           </a>
           <a class="spectrum-card reveal" href="./spectrum/government-event-design-2025.html" data-category="graphic">
             <div class="spectrum-thumb"><img src="./05_Spectrum/03_국가기관 행사 운영과 디자인_2025/베너 이미지/03_Project_Thumb_3.webp" alt="국가기관 행사 운영과 디자인" loading="lazy" /></div>
