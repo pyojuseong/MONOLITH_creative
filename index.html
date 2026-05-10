@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -779,14 +779,17 @@
       z-index: 80;
       width: 46px;
       height: 46px;
-      display: grid;
-      place-items: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
       border: 1px solid rgba(13, 17, 23, 0.12);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.82);
       color: var(--ink);
       font-size: 20px;
       font-weight: 900;
+      line-height: 1;
       cursor: pointer;
       box-shadow: 0 16px 42px rgba(5, 20, 45, 0.12);
       backdrop-filter: blur(14px);
@@ -929,6 +932,9 @@
         padding: 22px 0;
       }
     }
+  
+    .to-top { display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: 0; padding: 0; }
+    .to-top-icon { width: 24px; height: 24px; display: block; flex: 0 0 auto; }
   </style>
 </head>
 <body>
@@ -1017,7 +1023,7 @@
             </div>
             <span class="view-pill">VIEW</span>
           </a>
-          <a class="project-card reveal video-hover" href="./projects/project-3.html" aria-label="Space Challenge 2025 in 원주 상세로 이동">
+          <a class="project-card reveal video-hover" href="./spectrum/government-event-design-2025.html" aria-label="Space Challenge 2025 in 원주 상세로 이동">
             <img src="./03_Project_Thumb/03_Project_Thumb_3.webp" alt="Space Challenge 2025 in 원주 썸네일" loading="lazy" />
             <div class="project-content">
               <span class="project-index">PROJECT 03</span>
@@ -1137,6 +1143,10 @@
             </div>
             <div class="spectrum-info"><h3>의미를 전달하는 보도 촬영</h3><p>2026</p></div>
           </a>
+          <a class="spectrum-card reveal" href="./spectrum/ibk-intro-design-2025.html" data-category="motion branding">
+            <div class="spectrum-thumb"><img src="./05_Spectrum/04-1_IBK기업은행 인트로 디자인_2025/베너 이미지/1.jpg" alt="IBK기업은행 인트로 디자인 썸네일" loading="lazy" /></div>
+            <div class="spectrum-info"><h3>IBK기업은행 인트로 디자인</h3><p>2025</p></div>
+          </a>
           <a class="spectrum-card reveal video-hover" href="./spectrum/motion-typography-2023.html" data-category="video graphic">
             <div class="spectrum-thumb">
               <img class="base-thumb" src="./05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/베너 이미지/플레이 안될떄 썸네일.png" alt="현장감을 주는 모션 타이포그래피" loading="lazy" />
@@ -1145,8 +1155,8 @@
             <div class="spectrum-info"><h3>현장감을 주는 모션 타이포그래피</h3><p>2023</p></div>
           </a>
           <a class="spectrum-card reveal" href="./spectrum/drama-branding-moving-poster-2023.html" data-category="video branding">
-            <div class="spectrum-thumb"><img src="./05_Spectrum/06_드라마 브랜딩을 활용한 무빙포스터_2023/베너 이미지/아라문의 검.webp" alt="드라마 브랜딩을 활용한 무빙포스터" loading="lazy" /></div>
-            <div class="spectrum-info"><h3>드라마 브랜딩을 활용한 무빙포스터</h3><p>2023</p></div>
+            <div class="spectrum-thumb"><img src="./05_Spectrum/06_드라마 브랜딩을 활용한 무빙포스터_2023/베너 이미지/아라문의 검.webp" alt="드라마 브랜딩을 활용한 무빙포스터와 인쇄디자인" loading="lazy" /></div>
+            <div class="spectrum-info"><h3>드라마 브랜딩을 활용한 무빙포스터와 인쇄디자인</h3><p>2023</p></div>
           </a>
           <a class="spectrum-card reveal video-hover" href="./spectrum/app-prototype-2023.html" data-category="video uiux branding">
             <div class="spectrum-thumb">
@@ -1195,7 +1205,7 @@
       </div>
     </section>
   </main>
-  <button class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+  <button class="to-top" type="button" aria-label="맨 위로 이동"><svg class="to-top-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
 
   <script>
     const revealObserver = new IntersectionObserver((entries) => {

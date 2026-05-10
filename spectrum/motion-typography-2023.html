@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underwater Kinetictypography | MONOLITH Creative</title>
+  <style>
+    :root { --ink:#101113; --muted:#747981; --line:rgba(16,24,40,.1); --paper:#f2f2f2; --blue:#0554f2; --white:#fff; --radius:8px; --max:1180px; --wide:1500px; --shadow:0 24px 70px rgba(5,84,242,.12); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; background:var(--paper); color:var(--ink); }
+    body { min-width:320px; overflow-x:hidden; font-family:"Pretendard","Inter","Noto Sans KR",system-ui,-apple-system,BlinkMacSystemFont,sans-serif; line-height:1.5; }
+    a { color:inherit; text-decoration:none; } img,video { display:block; width:100%; }
+    .noise { pointer-events:none; position:fixed; inset:0; z-index:100; opacity:.035; background-image:linear-gradient(90deg,rgba(0,0,0,.42) 1px,transparent 1px),linear-gradient(rgba(0,0,0,.42) 1px,transparent 1px); background-size:48px 48px; mix-blend-mode:multiply; }
+    .nav { position:relative; z-index:10; width:min(calc(100% - 32px),var(--max)); height:58px; display:flex; align-items:center; gap:18px; margin:18px auto 0; padding:0 10px 0 28px; border:1px solid rgba(255,255,255,.75); border-radius:999px; background:rgba(242,242,242,.78); box-shadow:0 18px 60px rgba(5,20,45,.08); backdrop-filter:blur(18px); }
+    .brand { display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; flex:0 0 auto; } .brand-logo { width:38px; height:auto; }
+    .nav-links { display:flex; align-items:center; gap:clamp(20px,3vw,44px); margin-left:14px; color:rgba(13,17,23,.68); font-size:15px; font-weight:800; }
+    .contact-pill { min-width:112px; height:42px; display:inline-flex; align-items:center; justify-content:center; margin-left:auto; border-radius:999px; background:var(--blue); color:var(--white); font-size:15px; font-weight:900; line-height:1; box-shadow:0 14px 30px rgba(5,84,242,.22); }
+    .page { padding-bottom:90px; }
+    .hero-banner { width:min(calc(100% - 32px),var(--wide)); margin:26px auto 0; overflow:hidden; border-radius:var(--radius); background:#e9edf4; box-shadow:var(--shadow); }
+    .hero-banner img,.hero-banner video { height:auto; object-fit:contain; }
+    .intro { width:min(calc(100% - 360px),1420px); margin:112px auto 124px; }
+    .intro h1 { color:var(--ink); font-size:clamp(28px,2.4vw,44px); line-height:1.15; font-weight:900; letter-spacing:0; word-break:keep-all; }
+    .intro-copy { max-width:1180px; margin:56px auto 0; color:rgba(13,17,23,.72); font-size:clamp(17px,1.2vw,22px); line-height:1.72; font-weight:560; word-break:keep-all; }
+    .intro-copy p + p { margin-top:10px; }
+    .section { width:min(calc(100% - 32px),var(--wide)); margin:0 auto; padding:78px 0; border-top:1px solid var(--line); }
+    .section-title { width:min(100%,var(--max)); margin:0 auto 34px; color:var(--ink); font-size:clamp(22px,2.6vw,36px); line-height:1; font-weight:950; letter-spacing:0; }
+    .visual-grid { display:grid; gap:18px; align-items:start; width:min(100%,var(--max)); margin:0 auto; }
+    .visual-grid.one { grid-template-columns:1fr; }
+    .visual-grid.two { grid-template-columns:repeat(2,minmax(0,1fr)); } .visual-grid.styleframe-grid { grid-template-columns:repeat(6,minmax(0,1fr)); }
+    .visual-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .visual-item { overflow:hidden; border-radius:var(--radius); background:transparent; box-shadow:0 12px 34px rgba(5,20,45,.06); }
+    .visual-item.full-span { grid-column:1 / -1; } .styleframe-grid .visual-item { grid-column:span 3; } .styleframe-grid .visual-item.full-span { grid-column:1 / -1; } .styleframe-grid .visual-item.small-span { grid-column:span 2; }
+    .visual-item img,.visual-item video { width:100%; height:auto; object-fit:contain; }
+    .storyboard-frame { aspect-ratio:16 / 9; display:flex; align-items:center; justify-content:center; background:#fff; padding:18px; } .storyboard-frame img { width:100%; height:100%; object-fit:contain; object-position:center center; margin:auto; }
+    .media-player video { background:#05070b; }
+    .credit { width:min(calc(100% - 32px),var(--max)); margin:0 auto; padding:116px 0 0; text-align:center; border-top:1px solid var(--line); }
+    .credit h2 { color:var(--ink); font-size:clamp(24px,3vw,40px); line-height:1; font-weight:950; }
+    .credit-list { width:min(520px,100%); display:grid; grid-template-columns:1fr 1fr; gap:14px 24px; margin:34px auto 76px; font-size:clamp(14px,1vw,17px); line-height:1.4; }
+    .credit-role { text-align:right; color:rgba(13,17,23,.52); font-weight:800; text-transform:uppercase; } .credit-name { text-align:left; color:var(--ink); font-weight:850; }
+    .ending-logo { position:relative; z-index:2; width:min(260px,42vw); margin:0 auto -42px; filter:drop-shadow(0 22px 48px rgba(5,84,242,.13)); }
+    .ending-image { position:relative; width:min(100%,1420px); margin:0 auto; overflow:hidden; background:var(--paper); -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) 10%,black 32%,black 100%); mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) 10%,black 32%,black 100%); }
+    .ending-image img { width:100%; height:auto; object-fit:contain; }
+    .copyright { max-width:760px; margin:58px auto 0; color:rgba(13,17,23,.42); font-size:14px; line-height:1.8; font-weight:400; letter-spacing:0; word-break:keep-all; }
+    .to-top { position:fixed; right:24px; bottom:24px; z-index:80; width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center; line-height:1; border:1px solid rgba(13,17,23,.12); border-radius:999px; background:rgba(255,255,255,.82); color:var(--ink); font-size:20px; font-weight:900; line-height:1; cursor:pointer; box-shadow:0 16px 42px rgba(5,20,45,.12); backdrop-filter:blur(14px); }
+    .zoomable-image { cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; z-index:120; display:inline-flex; align-items:center; justify-content:center; line-height:1; padding:32px; border:0; background:rgba(13,17,23,.86); opacity:0; pointer-events:none; transition:opacity .22s ease; }
+    .image-lightbox.is-open { opacity:1; pointer-events:auto; } .image-lightbox img { width:auto; max-width:min(94vw,1600px); max-height:90vh; object-fit:contain; border-radius:var(--radius); box-shadow:0 32px 90px rgba(0,0,0,.34); cursor:zoom-out; }
+    @media (max-width:860px) { .nav { height:auto; min-height:58px; flex-wrap:wrap; gap:10px; padding:8px 10px 8px 16px; } .nav-links { order:3; width:100%; justify-content:space-between; gap:12px; margin:0; padding:0 8px 4px; font-size:13px; } .intro { width:min(calc(100% - 32px),var(--max)); margin:70px auto 78px; } .visual-grid.two,.visual-grid.three,.visual-grid.styleframe-grid { grid-template-columns:1fr; } .styleframe-grid .visual-item,.styleframe-grid .visual-item.small-span,.styleframe-grid .visual-item.full-span { grid-column:1 / -1; } .section { padding:68px 0; } }
+  
+    .to-top { display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: 0; padding: 0; }
+    .to-top-icon { width: 24px; height: 24px; display: block; flex: 0 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="../index.html#top" aria-label="MONOLITH Creative 홈"><img class="brand-logo" src="../01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" /></a>
+    <div class="nav-links"><a href="../index.html#concept">Concept</a><a href="../index.html#project">Project</a><a href="../index.html#workflow">Workflow</a><a href="../index.html#spectrum">Spectrum</a></div>
+    <a class="contact-pill" href="mailto:contact@monolithcreative.kr">Contact</a>
+  </nav>
+  <main class="page">
+    <section class="hero-banner reveal" aria-label="Underwater Kinetictypography 메인 배너"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/01_mainbanner/key 2.png" alt="Underwater Kinetictypography 메인 배너" /></section>
+    <section class="intro reveal"><h1>Underwater Kinetictypography</h1><div class="intro-copy"><p>권은비의 Underwater를 키네틱타이포그래피로 제작했습니다.</p><p>더운 여름을 타겟하여 연출한 것으로 시원한 푸른색감과 대비적인 노랑과 분홍 색감을 조합해 경쾌한 느낌을 연출했습니다.</p></div></section>
+    <section class="section reveal" aria-label="Main Visual"><h2 class="section-title">Main Visual</h2><div class="visual-grid one">
+          <figure class="visual-item media-player"><video class="volume-50" src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/underwater_kinetictypo.mp4" controls preload="metadata" aria-label="Underwater Kinetictypography Main Visual"></video></figure>
+    </div></section>
+    <section class="section reveal" aria-label="Styleframe"><h2 class="section-title">Styleframe</h2><div class="visual-grid styleframe-grid">
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/1_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/2.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/3.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/4_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/5_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/6_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/7.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/8.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/9.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/10.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/11_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item small-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/12_작게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item small-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/13_작게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item small-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/14_작게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/15_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item small-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/16_작게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item small-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/17_작게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item small-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/18_작게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+          <figure class="visual-item full-span"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/04_styleframe/19_크게.png" alt="Underwater Kinetictypography Styleframe" loading="lazy" /></figure>
+    </div></section>
+    <section class="section reveal" aria-label="Animation"><h2 class="section-title">Animation</h2><div class="visual-grid three">
+          <figure class="visual-item"><video src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/underwater_kinetictypo.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Underwater Kinetictypography Animation"></video></figure>
+          <figure class="visual-item"><video src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/underwater_kinetictypo_1.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Underwater Kinetictypography Animation"></video></figure>
+          <figure class="visual-item"><video src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/underwater_kinetictypo_2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Underwater Kinetictypography Animation"></video></figure>
+          <figure class="visual-item"><video src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/underwater_kinetictypo_3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Underwater Kinetictypography Animation"></video></figure>
+          <figure class="visual-item"><video src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/underwater_kinetictypo_4.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Underwater Kinetictypography Animation"></video></figure>
+          <figure class="visual-item"><video src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/05_animation/underwater_kinetictypo_5.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Underwater Kinetictypography Animation"></video></figure>
+    </div></section>
+    <section class="section reveal" aria-label="Process"><h2 class="section-title">Process</h2><div class="visual-grid one">
+          <figure class="visual-item media-player"><video class="volume-50" src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/06_process/animatics.mp4" controls preload="metadata" aria-label="Underwater Kinetictypography Process"></video></figure>
+    </div></section>
+    <section class="section reveal" aria-label="Storyboard"><h2 class="section-title">Storyboard</h2><div class="visual-grid two">
+          <figure class="visual-item storyboard-frame"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/07_storyboard/1.webp" alt="Underwater Kinetictypography Storyboard" loading="lazy" /></figure>
+          <figure class="visual-item storyboard-frame"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/07_storyboard/2.webp" alt="Underwater Kinetictypography Storyboard" loading="lazy" /></figure>
+    </div></section>
+    <section class="credit reveal" aria-label="Credit"><h2>Credit</h2><div class="credit-list"><span class="credit-role">DIRECTOR</span><span class="credit-name">Pyo Juseong</span></div><img class="ending-logo" src="../01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" /><div class="ending-image"><img src="../05_Spectrum/05_현장감을 주는 모션 타이포그래피_2023/상세페이지 내용과 이미지 (추후 추가예정)/08_ending/1.png" alt="Underwater Kinetictypography 엔딩 이미지" loading="lazy" /></div><p class="copyright">모든 저작물의 저작권은 MONOLITH creative에 있습니다. MNLC의 동의 없는 복제를 금지합니다.</p></section>
+  </main>
+  <button class="image-lightbox" type="button" aria-label="이미지 크게 보기 닫기"><img alt="" /></button>
+  <button class="to-top" type="button" aria-label="맨 위로 이동"><svg class="to-top-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+  <script>
+    document.querySelector(".to-top")?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    document.querySelectorAll(".volume-50").forEach((video) => { video.volume = 0.5; });
+    const lightbox = document.querySelector(".image-lightbox");
+    const lightboxImage = lightbox?.querySelector("img");
+    document.querySelectorAll(".hero-banner img, .visual-item img, .ending-image img").forEach((image) => { image.classList.add("zoomable-image"); image.addEventListener("click", () => { if (!lightbox || !lightboxImage) return; lightboxImage.src = image.currentSrc || image.src; lightboxImage.alt = image.alt || "Expanded project image"; lightbox.classList.add("is-open"); }); });
+    lightbox?.addEventListener("click", () => { lightbox.classList.remove("is-open"); if (lightboxImage) lightboxImage.removeAttribute("src"); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") { lightbox?.classList.remove("is-open"); if (lightboxImage) lightboxImage.removeAttribute("src"); } });
+  </script>
+</body>
+</html>

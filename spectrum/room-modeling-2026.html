@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -372,14 +372,17 @@
       z-index: 80;
       width: 46px;
       height: 46px;
-      display: grid;
-      place-items: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
       border: 1px solid rgba(13, 17, 23, 0.12);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.82);
       color: var(--ink);
       font-size: 20px;
       font-weight: 900;
+      line-height: 1;
       cursor: pointer;
       box-shadow: 0 16px 42px rgba(5, 20, 45, 0.12);
       backdrop-filter: blur(14px);
@@ -470,6 +473,9 @@
         grid-template-columns: 1fr;
       }
     }
+  
+    .to-top { display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: 0; padding: 0; }
+    .to-top-icon { width: 24px; height: 24px; display: block; flex: 0 0 auto; }
   </style>
 </head>
 <body>
@@ -545,7 +551,7 @@
     </section>
   </main>
   <button class="image-lightbox" type="button" aria-label="이미지 크게 보기 닫기"><img alt="" /></button>
-  <button class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+  <button class="to-top" type="button" aria-label="맨 위로 이동"><svg class="to-top-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
 
   <script>
     const reveals = document.querySelectorAll(".reveal");

@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Challenge 2025 in 원주 | MONOLITH Creative</title>
+  <style>
+    :root { --ink:#101113; --muted:#747981; --line:rgba(16,24,40,.1); --paper:#f2f2f2; --blue:#0554f2; --white:#fff; --radius:8px; --max:1180px; --wide:1500px; --shadow:0 24px 70px rgba(5,84,242,.12); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; background:var(--paper); color:var(--ink); }
+    body { min-width:320px; overflow-x:hidden; font-family:"Pretendard","Inter","Noto Sans KR",system-ui,-apple-system,BlinkMacSystemFont,sans-serif; line-height:1.5; }
+    a { color:inherit; text-decoration:none; } img,video { display:block; width:100%; }
+    .noise { pointer-events:none; position:fixed; inset:0; z-index:100; opacity:.035; background-image:linear-gradient(90deg,rgba(0,0,0,.42) 1px,transparent 1px),linear-gradient(rgba(0,0,0,.42) 1px,transparent 1px); background-size:48px 48px; mix-blend-mode:multiply; }
+    .nav { position:relative; z-index:10; width:min(calc(100% - 32px),var(--max)); height:58px; display:flex; align-items:center; gap:18px; margin:18px auto 0; padding:0 10px 0 28px; border:1px solid rgba(255,255,255,.75); border-radius:999px; background:rgba(242,242,242,.78); box-shadow:0 18px 60px rgba(5,20,45,.08); backdrop-filter:blur(18px); }
+    .brand { display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; flex:0 0 auto; } .brand-logo { width:38px; height:auto; }
+    .nav-links { display:flex; align-items:center; gap:clamp(20px,3vw,44px); margin-left:14px; color:rgba(13,17,23,.68); font-size:15px; font-weight:800; }
+    .contact-pill { min-width:112px; height:42px; display:inline-flex; align-items:center; justify-content:center; margin-left:auto; border-radius:999px; background:var(--blue); color:var(--white); font-size:15px; font-weight:900; line-height:1; box-shadow:0 14px 30px rgba(5,84,242,.22); }
+    .page { padding-bottom:90px; }
+    .hero-banner { width:min(calc(100% - 32px),var(--wide)); margin:26px auto 0; overflow:hidden; border-radius:var(--radius); background:#e9edf4; box-shadow:var(--shadow); }
+    .hero-banner img { height:auto; object-fit:contain; }
+    .intro { width:min(calc(100% - 360px),1420px); margin:112px auto 124px; }
+    .intro h1 { text-align:center; color:var(--ink); font-size:clamp(28px,2.4vw,44px); line-height:1.15; font-weight:900; letter-spacing:0; word-break:keep-all; }
+    .intro-copy { max-width:1180px; margin:56px auto 0; color:rgba(13,17,23,.72); font-size:clamp(17px,1.2vw,22px); line-height:1.72; font-weight:560; word-break:keep-all; } .intro-copy p + p { margin-top:10px; } .intro-copy p:nth-child(3) { margin-top:22px; }
+    .section { width:min(calc(100% - 32px),var(--wide)); margin:0 auto; padding:78px 0; border-top:1px solid var(--line); }
+    .section-title { width:min(100%,var(--max)); margin:0 auto 34px; color:var(--ink); font-size:clamp(22px,2.6vw,36px); line-height:1; font-weight:950; letter-spacing:0; }
+    .visual-group { width:min(100%,1920px); margin:0 auto 78px; }
+    .visual-group:last-child { margin-bottom:0; }
+    .visual-group h3 { width:min(100%,var(--max)); margin:0 auto 22px; font-size:clamp(18px,1.8vw,28px); line-height:1.1; font-weight:900; color:var(--ink); }
+    .visual-grid { display:grid; gap:18px; align-items:start; width:min(100%,var(--max)); margin:0 auto; } .visual-grid.leaflet { grid-template-columns:repeat(2,minmax(0,1fr)); } .visual-grid.full { grid-template-columns:1fr; } .visual-grid.cardnews { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .visual-grid.two { grid-template-columns:1fr; } .visual-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .visual-grid.signboard { grid-template-columns:minmax(0,1fr); width:min(50%,calc(var(--max) / 2)); max-width:590px; justify-content:center; background:transparent; }
+    .visual-item { overflow:hidden; border-radius:var(--radius); background:transparent; box-shadow:0 12px 34px rgba(5,20,45,.06); }
+    .visual-item img { width:100%; height:auto; object-fit:contain; }
+    .visual-grid.signboard .visual-item { box-shadow:none; background:transparent; border-radius:0; } .visual-grid.signboard .visual-item img { max-height:none; width:100%; object-fit:contain; background:transparent; display:block; }
+    .credit { width:min(calc(100% - 32px),var(--max)); margin:0 auto; padding:116px 0 0; text-align:center; border-top:1px solid var(--line); }
+    .credit h2 { color:var(--ink); font-size:clamp(24px,3vw,40px); line-height:1; font-weight:950; }
+    .credit-row { width:min(460px,100%); display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:34px auto 76px; font-size:clamp(14px,1vw,17px); line-height:1.4; }
+    .credit-role { text-align:right; color:rgba(13,17,23,.52); font-weight:800; } .credit-name { text-align:left; color:var(--ink); font-weight:850; }
+    .ending-logo { position:relative; z-index:2; width:min(260px,42vw); margin:0 auto -42px; filter:drop-shadow(0 22px 48px rgba(5,84,242,.13)); }
+    .ending-image { position:relative; width:min(100%,1420px); margin:0 auto; overflow:hidden; background:var(--paper); -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) 10%,black 32%,black 100%); mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) 10%,black 32%,black 100%); }
+    .ending-image img { width:100%; height:auto; object-fit:contain; }
+    .copyright { max-width:760px; margin:58px auto 0; color:rgba(13,17,23,.42); font-size:14px; line-height:1.8; font-weight:400; letter-spacing:0; word-break:keep-all; }
+    .to-top { position:fixed; right:24px; bottom:24px; z-index:80; width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center; line-height:1; border:1px solid rgba(13,17,23,.12); border-radius:999px; background:rgba(255,255,255,.82); color:var(--ink); font-size:20px; font-weight:900; line-height:1; cursor:pointer; box-shadow:0 16px 42px rgba(5,20,45,.12); backdrop-filter:blur(14px); }
+    .zoomable-image { cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; z-index:120; display:inline-flex; align-items:center; justify-content:center; line-height:1; padding:32px; border:0; background:rgba(13,17,23,.86); opacity:0; pointer-events:none; transition:opacity .22s ease; }
+    .image-lightbox.is-open { opacity:1; pointer-events:auto; } .image-lightbox img { width:auto; max-width:min(94vw,1600px); max-height:90vh; object-fit:contain; border-radius:var(--radius); box-shadow:0 32px 90px rgba(0,0,0,.34); cursor:zoom-out; }
+    .reveal { opacity:1; transform:none; transition:opacity .8s ease,transform .8s ease; }
+    @media (max-width:860px) { .nav { height:auto; min-height:58px; flex-wrap:wrap; gap:10px; padding:8px 10px 8px 16px; } .nav-links { order:3; width:100%; justify-content:space-between; gap:12px; margin:0; padding:0 8px 4px; font-size:13px; } .intro { width:min(calc(100% - 32px),var(--max)); margin:70px auto 78px; } .visual-grid.two,.visual-grid.three,.visual-grid.signboard,.visual-grid.leaflet,.visual-grid.full,.visual-grid.cardnews { grid-template-columns:1fr; } .visual-grid.signboard { width:min(100%,var(--max)); max-width:590px; } .section { padding:68px 0; } }
+  
+    .to-top { display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: 0; padding: 0; }
+    .to-top-icon { width: 24px; height: 24px; display: block; flex: 0 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="../index.html#top" aria-label="MONOLITH Creative 홈"><img class="brand-logo" src="../01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" /></a>
+    <div class="nav-links"><a href="../index.html#concept">Concept</a><a href="../index.html#project">Project</a><a href="../index.html#workflow">Workflow</a><a href="../index.html#spectrum">Spectrum</a></div>
+    <a class="contact-pill" href="mailto:contact@monolithcreative.kr">Contact</a>
+  </nav>
+  <main class="page">
+    <section class="hero-banner reveal" aria-label="Space Challenge 2025 in 원주 메인 배너"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/01_mainbanner/03_Project_Thumb_3.webp" alt="Space Challenge 2025 in 원주 메인 배너" /></section>
+    <section class="intro reveal"><h1>Space Challenge 2025 in 원주</h1><div class="intro-copy"><p>대한민국 공군(Republic of Korea Airforce)에서 매해 개최하는 Space Challenge 2025,</p><p>공군 제8전투비행단의 디자인을 총괄하여 작업했습니다.</p><p>국방출판지원단과의 인쇄작업까지 연계하여, 성공적인 디자인 납품과 행사운영을 완성했습니다.</p><p>리플릿, 대형 안내판, X베너, 현수막, 카드뉴스, 썬캡 등을 디자인했습니다.</p></div></section>
+    <section class="section reveal" aria-label="Main Visual"><h2 class="section-title">Main Visual</h2>
+      <section class="visual-group reveal" aria-label="리플릿">
+        <h3>리플릿</h3>
+        <div class="visual-grid leaflet">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/01_리플릿/1.webp" alt="Space Challenge 2025 리플릿 1" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/01_리플릿/2.webp" alt="Space Challenge 2025 리플릿 2" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="스태프 카드">
+        <h3>스태프 카드</h3>
+        <div class="visual-grid full">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/02_스태프 카드/1.webp" alt="Space Challenge 2025 스태프 카드 1" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="X베너">
+        <h3>X베너</h3>
+        <div class="visual-grid full">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/03_X베너/1.webp" alt="Space Challenge 2025 X베너 1" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/03_X베너/2.webp" alt="Space Challenge 2025 X베너 2" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/03_X베너/3.webp" alt="Space Challenge 2025 X베너 3" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="현수막">
+        <h3>현수막</h3>
+        <div class="visual-grid full">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/04_현수막/1.webp" alt="Space Challenge 2025 현수막 1" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/04_현수막/2.webp" alt="Space Challenge 2025 현수막 2" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="썬 캡">
+        <h3>썬 캡</h3>
+        <div class="visual-grid full">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/05_썬 캡/1.webp" alt="Space Challenge 2025 썬 캡 1" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="대형 안내판">
+        <h3>대형 안내판</h3>
+        <div class="visual-grid full">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/06_대형 안내판/1.webp" alt="Space Challenge 2025 대형 안내판 1" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="카드뉴스">
+        <h3>카드뉴스</h3>
+        <div class="visual-grid cardnews">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/07_카드뉴스/카드뉴스대지 1.jpg" alt="Space Challenge 2025 카드뉴스 카드뉴스대지 1" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/07_카드뉴스/카드뉴스대지 2.jpg" alt="Space Challenge 2025 카드뉴스 카드뉴스대지 2" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/07_카드뉴스/카드뉴스대지 3.jpg" alt="Space Challenge 2025 카드뉴스 카드뉴스대지 3" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/07_카드뉴스/카드뉴스대지 4.jpg" alt="Space Challenge 2025 카드뉴스 카드뉴스대지 4" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/07_카드뉴스/카드뉴스대지 5.jpg" alt="Space Challenge 2025 카드뉴스 카드뉴스대지 5" loading="lazy" /></figure>
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/07_카드뉴스/카드뉴스대지 6.jpg" alt="Space Challenge 2025 카드뉴스 카드뉴스대지 6" loading="lazy" /></figure>
+        </div>
+      </section>
+      <section class="visual-group reveal" aria-label="사인회 안내판">
+        <h3>사인회 안내판</h3>
+        <div class="visual-grid signboard">
+          <figure class="visual-item"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/03_mainvisual/08_사인회 안내판/1.webp" alt="Space Challenge 2025 사인회 안내판 1" loading="lazy" /></figure>
+        </div>
+      </section>
+    </section>
+    <section class="credit reveal" aria-label="Credit"><h2>Credit</h2><div class="credit-row"><span class="credit-role">DIRECTOR</span><span class="credit-name">Pyo Juseong</span></div><img class="ending-logo" src="../01_Logo/logo_1_배경색이 %23F2F2F2일때.webp" alt="MONOLITH Creative" /><div class="ending-image"><img src="../05_Spectrum/03_국가기관 행사 운영과 디자인_2025/상세페이지 내용과 이미지 (추후 추가예정)/08_ending/1.webp" alt="Space Challenge 2025 in 원주 엔딩 이미지" loading="lazy" /></div><p class="copyright">모든 저작물의 저작권은 MONOLITH creative에 있습니다. MNLC의 동의 없는 복제를 금지합니다.</p></section>
+  </main>
+  <button class="image-lightbox" type="button" aria-label="이미지 크게 보기 닫기"><img alt="" /></button>
+  <button class="to-top" type="button" aria-label="맨 위로 이동"><svg class="to-top-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+  <script>
+    document.querySelector(".to-top")?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    const lightbox = document.querySelector(".image-lightbox");
+    const lightboxImage = lightbox?.querySelector("img");
+    document.querySelectorAll(".hero-banner img, .visual-item img, .ending-image img").forEach((image) => { image.classList.add("zoomable-image"); image.addEventListener("click", () => { if (!lightbox || !lightboxImage) return; lightboxImage.src = image.currentSrc || image.src; lightboxImage.alt = image.alt || "Expanded project image"; lightbox.classList.add("is-open"); }); });
+    lightbox?.addEventListener("click", () => { lightbox.classList.remove("is-open"); if (lightboxImage) lightboxImage.removeAttribute("src"); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") { lightbox?.classList.remove("is-open"); if (lightboxImage) lightboxImage.removeAttribute("src"); } });
+  </script>
+</body>
+</html>
